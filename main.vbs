@@ -9,7 +9,7 @@ directory = objShell.CurrentDirectory
 sub main()
     dim input, data, name, pages, pageURL, pageURLLeft, pageURLRight, pageURLList, i, element, command
 
-    input = InputBox("Paste the Fakku URL that you want to download")
+    input = InputBox("Paste the Fakku URL that you want to download from")
 
     if input = "" then
         wscript.quit
