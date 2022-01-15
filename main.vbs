@@ -36,12 +36,15 @@ sub main()
 
     pageURLList = left(pageURLList, len(pageURLList) - 2)
     pageURLList = split(pageURLList, vbCrlf)
+    command = ""
 
     for each element in pageURLList
-        command = "curl """ & element & """ --output """ & directory & "\" & name & "\" & midString(element, "thumbs/", ".thumb") & midString(element & "$", ".thumb", "$") & """"
-        objShell.run(command)
+        command = command & "curl """ & element & """ --output """ & directory & "\" & name & "\" & midString(element, "thumbs/", ".thumb") & midString(element & "$", ".thumb", "$") & """" & vbCrlf
     next
 
+    objFile.CreateTextFile(directory & "\command.cmd", true).writeline(command)
+    call objShell.run("""" & directory & "\command.cmd""",, true)
+    objFile.DeleteFile(directory & "\command.cmd")
     call msgbox("Done", 0+64)
     main()
 end sub
